@@ -1,0 +1,119 @@
+abigailbarnes p1bitmanip grade: 90/103 
+ 
+https://phoenixforge.cs.uchicago.edu/svn/abigailbarnes-cs154-aut-20/p1bitmanip 
+Grading revision: 2 
+
+$ make
+/usr/local/gcc/5.5.0/bin/gcc -O -Wall -lm -o btest bits.c btest.c decl.c tests.c
+bits.c: In function ‘implication’:
+bits.c:375:10: warning: suggest parentheses around operand of ‘!’ or change ‘|’ to ‘||’ or ‘!’ to ‘~’ [-Wparentheses]
+   return !(x ^ y) | y;
+          ^
+bits.c: In function ‘satMul2’:
+bits.c:516:37: warning: variable ‘arg2’ set but not used [-Wunused-but-set-variable]
+   int sat_val, min, max, ans, arg1, arg2;
+                                     ^
+bits.c:516:31: warning: variable ‘arg1’ set but not used [-Wunused-but-set-variable]
+   int sat_val, min, max, ans, arg1, arg2;
+                               ^
+/usr/local/gcc/5.5.0/bin/gcc -O -Wall -o ishow ishow.c
+
+$ ./driver.pl
+1. Running './dlc -z' to identify coding rules violations.
+dlc:bits.c:187:bang: Illegal operator (++)
+dlc:bits.c:189:bang: Zapping function body!
+dlc:bits.c:215:bitCount: Warning: 41 operators exceeds max of 40
+dlc:bits.c:273:conditional: Illegal operator (++)
+dlc:bits.c:277:conditional: Zapping function body!
+
+2. Compiling and running './btest -g' to determine correctness score.
+/usr/local/gcc/5.5.0/bin/gcc -O -Wall -lm -o btest bits.c btest.c decl.c tests.c 
+bits.c: In function ‘bang’:
+bits.c:185:7: warning: unused variable ‘ans’ [-Wunused-variable]
+bits.c: In function ‘conditional’:
+bits.c:271:25: warning: unused variable ‘ansz’ [-Wunused-variable]
+bits.c:271:16: warning: unused variable ‘ansy’ [-Wunused-variable]
+bits.c:271:7: warning: unused variable ‘comp’ [-Wunused-variable]
+bits.c: In function ‘implication’:
+bits.c:375:10: warning: suggest parentheses around operand of ‘!’ or change ‘|’ to ‘||’ or ‘!’ to ‘~’ [-Wparentheses]
+bits.c: In function ‘satMul2’:
+bits.c:516:52: warning: variable ‘arg2’ set but not used [-Wunused-but-set-variable]
+bits.c:516:43: warning: variable ‘arg1’ set but not used [-Wunused-but-set-variable]
+
+3. Running './dlc -Z' to identify operator count violations.
+dlc:save-bits.c:187:bang: Illegal operator (++)
+dlc:save-bits.c:189:bang: Zapping function body!
+dlc:save-bits.c:215:bitCount: Warning: 41 operators exceeds max of 40
+dlc:save-bits.c:215:bitCount: Zapping function body!
+dlc:save-bits.c:273:conditional: Illegal operator (++)
+dlc:save-bits.c:277:conditional: Zapping function body!
+
+4. Compiling and running './btest -g -r 2' to determine performance score.
+/usr/local/gcc/5.5.0/bin/gcc -O -Wall -lm -o btest bits.c btest.c decl.c tests.c 
+save-bits.c: In function ‘bang’:
+save-bits.c:185:7: warning: unused variable ‘ans’ [-Wunused-variable]
+   int ans;
+       ^
+save-bits.c: In function ‘bitCount’:
+save-bits.c:201:79: warning: unused variable ‘val0x0000ffff’ [-Wunused-variable]
+   int val0x55555555, val0x33333333, val0x0f0f0f0f, val0x00ff00ff, val0x0000ffff;
+                                                                               ^
+save-bits.c:201:61: warning: unused variable ‘val0x00ff00ff’ [-Wunused-variable]
+   int val0x55555555, val0x33333333, val0x0f0f0f0f, val0x00ff00ff, val0x0000ffff;
+                                                             ^
+save-bits.c:201:43: warning: unused variable ‘val0x0f0f0f0f’ [-Wunused-variable]
+   int val0x55555555, val0x33333333, val0x0f0f0f0f, val0x00ff00ff, val0x0000ffff;
+                                           ^
+save-bits.c:201:25: warning: unused variable ‘val0x33333333’ [-Wunused-variable]
+   int val0x55555555, val0x33333333, val0x0f0f0f0f, val0x00ff00ff, val0x0000ffff;
+                         ^
+save-bits.c:201:7: warning: unused variable ‘val0x55555555’ [-Wunused-variable]
+   int val0x55555555, val0x33333333, val0x0f0f0f0f, val0x00ff00ff, val0x0000ffff;
+       ^
+save-bits.c: In function ‘conditional’:
+save-bits.c:271:25: warning: unused variable ‘ansz’ [-Wunused-variable]
+save-bits.c:271:16: warning: unused variable ‘ansy’ [-Wunused-variable]
+   int comp, ansy, ansz;
+                ^
+save-bits.c:271:7: warning: unused variable ‘comp’ [-Wunused-variable]
+   int comp, ansy, ansz;
+       ^
+save-bits.c: In function ‘implication’:
+save-bits.c:375:10: warning: suggest parentheses around operand of ‘!’ or change ‘|’ to ‘||’ or ‘!’ to ‘~’ [-Wparentheses]
+   return !(x ^ y) | y;
+          ^
+save-bits.c: In function ‘satMul2’:
+save-bits.c:516:52: warning: variable ‘arg2’ set but not used [-Wunused-but-set-variable]
+save-bits.c:516:43: warning: variable ‘arg1’ set but not used [-Wunused-but-set-variable]
+
+
+5. Running './dlc -e' to get operator count of each function.
+
+Correctness Results	Perf Results
+Points	Rating	Errors	Points	Ops	Puzzle
+4	4	0	2	5	absVal
+3	3	0	2	9	addOK
+2	2	0	2	9	allEvenBits
+0	4	1	0	0	bang
+4	4	0	0	41	bitCount
+1	1	0	2	3	bitNor
+2	2	0	2	10	byteSwap
+0	3	1	0	0	conditional
+3	3	0	2	9	ezThreeFourths
+2	2	0	2	10	fitsBits
+2	2	0	2	3	getByte
+4	4	0	2	15	greatestBitPos
+2	2	0	2	3	implication
+3	3	0	2	7	isAsciiDigit
+2	2	0	2	2	isEqual
+3	3	0	2	10	isLess
+3	3	0	2	2	isNonNegative
+4	4	0	2	10	isPower2
+1	1	0	2	4	isTmin
+1	1	0	2	1	minusOne
+3	3	0	2	11	rotateLeft
+3	3	0	2	20	satMul2
+
+Score = 90/103 [52/59 Corr + 38/44 Perf] (184 total operators)
+
+Final Grade: 90/103
